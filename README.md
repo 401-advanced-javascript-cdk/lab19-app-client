@@ -4,9 +4,9 @@ Implementation of the Q manager for event driven apps
 
 ## Links and Resources
 #### This lab is broken down into three seperate repos
-* [API Server/Q Server](https://github.com/401-advanced-javascript-cdk/lab19-q-api-server/pull/1)
-* [Q Client](https://github.com/401-advanced-javascript-cdk/lab-19/lab19-app-client/pull/1)
-* [Q Logger](https://github.com/401-advanced-javascript-cdk/lab19-q-logger/pull/1)
+* [API Server/Q Server](https://github.com/401-advanced-javascript-cdk/lab19-q-api-server/pull/2)
+* [Q Client](https://github.com/401-advanced-javascript-cdk/lab-19/lab19-app-client/pull/2)
+* [Q Logger](https://github.com/401-advanced-javascript-cdk/lab19-q-logger/pull/2)
 
 ## Modules
 ### API Server/Q Server
