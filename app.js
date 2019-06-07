@@ -10,20 +10,34 @@ const {promisify} = require('util');
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
 
-const file = process.argv.slice(2).shift();
-
 const transformText = (data) => {
   return data.toString().toUpperCase();
-}
+};
 
+const args = process.argv.slice(2);
+const file = args[0];
+
+const messageData = {}
 readFileAsync(file)
-  .then(rawData => transformText(rawData))
-  .then(text => writeFileAsync(file, Buffer.from(text)))
+  .then(rawData => {
+    messageData.rawData = rawData;
+    return transformText(rawData)
+  })
+  .then(text => {
+    messageData.text = text;
+    writeFileAsync(file, Buffer.from(text))
+  })
   .then(() => {
-    QClient.publish('files', 'file-save', `new text saved to ${file}`);
+    QClient.publish('files', 'file-save', {
+      message: 'File read, transformed, and written',
+      oldText: messageData.rawData.toString(),
+      newText: messageData.text,
+      filepath: file,
+    });
   })
   .catch(error => {
-    QClient.publish('files', 'file-save', `Error: ${error}`);
+    console.log(error)
+    QClient.publish('files', 'file-error', error);
 });
 
 module.exports = readFileAsync;
